@@ -1,0 +1,44 @@
+#include <iostream>
+struct Point {
+  double x;
+  double y;
+};
+class Shape {
+public:
+  virtual void draw() const = 0;
+};
+class Line : public Shape {
+private:
+  Point p1, p2;
+public:
+  Line(Point start, Point end) : p1(start), p2(end) {}
+
+  void draw() const override {
+    std::cout << "Drawing a line from (" << p1.x << ", " << p1.y << ") to (" << p2.x << ", " << p2.y << ")" << std::endl;
+  }
+};
+class Circle : public Shape {
+private:
+  Point center;
+  double radius;
+public:
+  Circle(Point c, double r) : center(c), radius(r) {}
+
+  void draw() const override {
+    std::cout << "Drawing a circle at (" << center.x << ", " << center.y << ") with radius " << radius << std::endl;
+  }
+};
+
+int main() {
+  Point p1{10, 20};
+  Point p2{30, 40};
+  Point center{50, 50};
+
+  Line line(p1, p2);
+  Circle circle(center, 15);
+
+  line.draw();
+  circle.draw();
+
+  return 0;
+}
